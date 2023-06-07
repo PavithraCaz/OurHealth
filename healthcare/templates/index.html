@@ -1,0 +1,659 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Health</title>
+    <!-- Link start -->
+    <link rel="icon" href="{% static 'image/favicon.ico' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css">
+    <!-- Link end -->
+
+    <!-- Script start -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1e88e5",
+                    },
+                },
+            },
+        };
+    </script>
+    <!-- Script end -->
+
+    <!-- Css start -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Toggle button */
+        #nav-mobile-btn.close span:first-child {
+            transform: rotate(45deg);
+            top: 4px;
+            position: relative;
+            background: #1e88e5";
+
+        }
+
+        #nav-mobile-btn.close span:nth-child(2) {
+            transform: rotate(-45deg);
+            margin-top: 0px;
+            background: #1e88e5";
+
+        }
+
+        /* Toggle button */
+
+        /* Active button */
+        header nav a.active {
+            color: #1e88e5;
+            text-decoration: underline;
+        }
+
+        footer nav a.active {
+            font-weight: 700;
+        }
+
+        /* Active button */
+
+
+        /* read more */
+        .toggle-text {
+            display: none;
+        }
+
+        /* read more */
+
+        /* Tab */
+        .tabs .tab-nav li.active>span {
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .tabs .tab-nav li.active>.span::before {
+            content: "";
+            position: absolute;
+            width: 50%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            border-bottom: 2px solid #1e88e5;
+        }
+
+        .tabs .tab-nav li.active>span {
+            border-bottom: 4px solid #1e88e5;
+            transition: all 0.2s ease;
+            color: #1e88e5;
+        }
+
+        /* .tabs .tab-nav li.active>.span1 {
+            background-color: #1e88e5;
+            color: white;
+        } */
+
+        .tabs .tab {
+            display: none;
+        }
+
+        .tabs .tab.active {
+            display: block;
+        }
+
+        /* Tab */
+    </style>
+    <!-- Css end -->
+</head>
+
+<body>
+    <button onclick="topFunction()"
+        class="hidden fixed md:bottom-8 bottom-2 md:right-8 right-2 z-50 focus:outline-none " id="scrollBtn"
+        title="Go to top">
+        <span class="material-symbols-outlined text-primary bg-white p-2 border-2 border-primary rounded-lg">
+            expand_less
+            </span>
+    </button>
+    <!-- Header start -->
+    <header class="relative z-50 w-full md:h-20 h-16 shadow bg-white sticky top-0">
+        <div
+            class="container items-center flex md:justify-between justify-start mx-auto h-full max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5">
+            <a class="" href="{% url 'index' %}">
+                <img class="md:block hidden" src="{% static 'image/oh-small.png' %}" alt="logo">
+                <img class="md:hidden block" src="{% static 'image/oh-big.png' %}" alt="logo">
+            </a>
+            <nav id="nav"
+                class="md:relative absolute top-0 left-0 z-50 items-center md:flex flex md:flex-row flex-col justify-between hidden md:w-auto w-full md:h-24 h-64 md:py-0 pt-5 md:mt-0 mt-16 md:text-base text-sm text-secondary md:bg-transparent bg-white md:border-none border-b">
+                <a href="{% url 'index' %}"
+                    class="font-bold duration-100 lg:mr-8 md:mr-4 mr-0 transition-color hover:text-primary active">Home</a>
+                <a href="{% url 'index' %}"
+                    class="font-bold duration-100 lg:mr-8 md:mr-4 mr-0 transition-color hover:text-primary">About</a>
+                <a href="{% url 'index' %}"
+                    class="font-bold duration-100 lg:mr-8 md:mr-4 mr-0 transition-color hover:text-primary">Department</a>
+                <a href="{% url 'index' %}"
+                    class="font-bold duration-100 lg:mr-8 md:mr-4 mr-0 transition-color hover:text-primary">Doctors</a>
+                <div class="flex flex-col w-full font-medium border-2 border-primary md:hidden block ">
+                    <a href="{% url 'index' %}"
+                        class="relative inline-block w-full px-5 py-3 leading-none text-center bg-primary hover:bg-white text-white hover:text-primary font-bold text-sm">
+                        Make Appointment
+                    </a>
+
+                </div>
+                <a href="{% url 'index' %}"
+                    class="md:block hidden border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-white bg-primary px-4 py-2 font-bold md:text-base">
+                    Make Appointment
+                </a>
+            </nav>
+
+            <div id="nav-mobile-btn"
+                class="absolute top-0 right-0 z-50 md:hidden block w-6 cursor-pointer select-none md:mt-10 mt-5 mr-5">
+                <span class="block w-full h-1 mt-2 sm:mt-1 duration-200 transform bg-primary rounded-full"></span>
+                <span class="block w-full h-1 mt-1 duration-200 transform bg-primary rounded-full"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header end -->
+
+    <!-- Main start -->
+    <main class="z-50 w-full">
+        <!-- Section 1 start -->
+        <section class="section1 w-full xl:relative">
+            <div class=""
+                style="background-image: url('/static/image/banner.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; box-shadow: inset 0 0 0 2000px rgba(30, 136, 229, 0.9);">
+                <div class="container mx-auto max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5 md:py-20 py-10">
+                    <div class="flex md:flex-nowrap flex-wrap items-center">
+                        <div class="md:text-left text-center md:w-6/12 w-full">
+                            <h1 class="md:text-5xl sm:text-4xl text-3xl font-bold text-white leading-tight">
+                                Welcom to<br>
+                                The "OUR HEALTH" center!
+                            </h1>
+                            <p class="md:text-base text-white text-sm md:mx-0 mx-auto md:py-4 py-2">
+                                We care for our patients' demands in the most effective way possible in accordance with
+                                their preferences. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
+                                placeat voluptate necessitatibus unde dignissimos praesentium? Recusandae minus deserunt
+                                dolorem, perferendis dolorum nostrum explicabo maxime neque vitae velit laudantium in
+                                quaerat.
+                            </p>
+                            <button
+                                class="md:my-4 my-2 border-2 hover:border-2 hover:border-white border-primary rounded-full text-primary hover:text-white hover:bg-transparent bg-white md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                                Contact Us
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 2 start -->
+        <section class="section2 w-full">
+            <div class="container mx-auto max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5">
+                <div class="flex flex-wrap md:justify-between justify-center items-center">
+                    <div class="md:w-4/12 md:pt-20 pt-5 md:order-first order-last">
+                        <img src="{% static 'image/doctor1.png' %}" alt="doctor">
+                    </div>
+                    <div class="md:w-8/12 md:text-start text-center md:px-6 px-3 order-first md:order-last">
+                        <h2
+                            class="md:text-4xl sm:text-3xl text-2xl font-black text-primary md:text-left sm:text-center text-center md:pt-20 pt-10">
+                            Our Specialized Team is Ready to Help You!
+                        </h2>
+                        <p class="md:text-base text-dark text-sm md:text-left sm:text-center text-center">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure omnis rerum tempora atque
+                            voluptatem tenetur esse cum qui odit ratione, in, debitis aut explicabo animi ex dolorum
+                            asperiores exercitationem dicta.
+                        </p>
+                        <button
+                            class="md:my-4 my-2 border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-transparent bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                            Know More
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Section 3 start -->
+        <section class="section3 w-full xl:relative">
+            <div class=""
+                style="background-image: url('/static/image/quot-banner.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; box-shadow: inset 0 0 0 2000px rgba(30, 136, 229, 0.9);">
+                <div class="container mx-auto max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5 md:py-20 py-10">
+                    <div class="flex justify-between items-center">
+
+                        <h2
+                            class="md:text-4xl sm:text-3xl text-2xl font-black text-white md:text-left sm:text-center text-center">
+                            Don't hesitate to be in touch.
+                        </h2>
+                        <button
+                            class="md:my-4 my-2 border-2 hover:border-2 hover:border-white border-white rounded-full text-primary hover:text-white hover:bg-transparent bg-white md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                            Contact&nbsp;Us
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 4 start -->
+        <section class="section4 w-full">
+            <div class="container mx-auto max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5 md:py-20 py-10 tabs">
+                <h2 class="md:text-4xl sm:text-3xl text-2xl font-black text-primary text-center">
+                    Our Department
+                </h2>
+                <div class="md:w-6/12 w-full mx-auto shadow rounded-xl bg-white md:px-4 px-2 md:my-10 my-5">
+                    <div class="flex flex-wrap justify-center items-center">
+                        <!-- <h4 class="lg:text-2xl md:text-xl text-lg text-secondary font-bold md:py-0 py-2">Our Brands</h4> -->
+                        <ul class="flex items-center tab-nav">
+                            <li class="active inline-block mr-5"><span data-href="#main_tab-1"
+                                    class="material-symbols-outlined img border-b-4 border-transparent cursor-pointer">
+                                    cardiology
+                                </span>
+                            </li>
+                            <li class="inline-block mr-5"><span data-href="#main_tab-2"
+                                    class="material-symbols-outlined img border-b-4 border-transparent cursor-pointer">
+                                    pulmonology
+                                </span></li>
+                            <li class="inline-block mr-5"><span data-href="#main_tab-3"
+                                    class="material-symbols-outlined img border-b-4 border-transparent cursor-pointer">
+                                    neurology
+                                </span></li>
+                            <li class="inline-block mr-5"><span data-href="#main_tab-4"
+                                    class="material-symbols-outlined img border-b-4 border-transparent cursor-pointer">
+                                    orthopedics
+                                </span></li>
+                            <li class="inline-block mr-5"><span data-href="#main_tab-5"
+                                    class="material-symbols-outlined img border-b-4 border-transparent cursor-pointer">
+                                    radiology
+                                </span></li>
+                            <li class="inline-block mr-5"><span data-href="#main_tab-6"
+                                    class="material-symbols-outlined img border-b-4 border-transparent cursor-pointer">
+                                    gastroenterology
+                                </span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- ---------------------------------------------------------- -->
+                <div class="tab active" id="main_tab-1">
+                    <div class="flex justify-between flex-wrap lg:flex-no-wrap items-center lg:text-left text-center">
+                        <div class="lg:w-6/12 w-full ">
+                            <img src="{% static 'image/Cardiology.png' %}" alt="Cardiology" class="mx-auto border-primary border-4">
+                        </div>
+                        <div class="lg:w-6/12 w-full">
+                            <h3 class="font-bold lg:text-3xl md:text-2xl text-xl text-primary md:py-4 py-2">
+                                Welcome to our Cardiology</h3>
+                            <p class="md:text-base text-sm text-secondary w-8/12 lg:mx-0 mx-auto">Lorem
+                                Ipsum is
+                                simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been
+                                the industry's standard dummy text ever since the 1500s,</p>
+                            <button
+                                class="md:my-4 my-2 border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-transparent bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                                Know More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ---------------------------------------------------------- -->
+                <div class="tab" id="main_tab-2">
+                    <div class="flex justify-between flex-wrap lg:flex-no-wrap items-center lg:text-left text-center">
+                        <div class="lg:w-6/12 w-full">
+                            <img src="{% static 'image/Pulmonology.png' %}" alt="Pulmonology" class="mx-auto border-primary border-4">
+                        </div>
+                        <div class="lg:w-6/12 w-full">
+                            <h3 class="font-bold lg:text-3xl md:text-2xl text-xl text-primary md:py-4 py-2">
+                                Welcome to our Pulmonology</h3>
+                            <p class="md:text-base text-sm text-secondary w-8/12 lg:mx-0 mx-auto">Lorem
+                                Ipsum is
+                                simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been
+                                the industry's standard dummy text ever since the 1500s,</p>
+                            <button
+                                class="md:my-4 my-2 border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-transparent bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                                Know More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ---------------------------------------------------------- -->
+                <div class="tab" id="main_tab-3">
+                    <div class="flex justify-between flex-wrap lg:flex-no-wrap items-center lg:text-left text-center">
+                        <div class="lg:w-6/12 w-full">
+                            <img src="{% static 'image/Neurology.png' %}" alt="Neurology" class="mx-auto border-primary border-4">
+                        </div>
+                        <div class="lg:w-6/12 w-full">
+                            <h3 class="font-bold lg:text-3xl md:text-2xl text-xl text-primary md:py-4 py-2">
+                                Welcome to our Neurology</h3>
+                            <p class="md:text-base text-sm text-secondary w-8/12 lg:mx-0 mx-auto">Lorem
+                                Ipsum is
+                                simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been
+                                the industry's standard dummy text ever since the 1500s,</p>
+                            <button
+                                class="md:my-4 my-2 border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-transparent bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                                Know More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ---------------------------------------------------------- -->
+                <div class="tab" id="main_tab-4">
+                    <div class="flex justify-between flex-wrap lg:flex-no-wrap items-center lg:text-left text-center">
+                        <div class="lg:w-6/12 w-full">
+                            <img src="{% static 'image/Orthopedics.png' %}" alt="Orthopedics" class="mx-auto border-primary border-4">
+                        </div>
+                        <div class="lg:w-6/12 w-full">
+                            <h3 class="font-bold lg:text-3xl md:text-2xl text-xl text-primary md:py-4 py-2">
+                                Welcome to our Orthopedics</h3>
+                            <p class="md:text-base text-sm text-secondary w-8/12 lg:mx-0 mx-auto">Lorem
+                                Ipsum is
+                                simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been
+                                the industry's standard dummy text ever since the 1500s,</p>
+                            <button
+                                class="md:my-4 my-2 border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-transparent bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                                Know More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ---------------------------------------------------------- -->
+                <div class="tab" id="main_tab-5">
+                    <div class="flex justify-between flex-wrap lg:flex-no-wrap items-center lg:text-left text-center">
+                        <div class="lg:w-6/12 w-full">
+                            <img src="{% static 'image/Radiology.png' %}" alt="Radiology" class="mx-auto border-primary border-4">
+                        </div>
+                        <div class="lg:w-6/12 w-full">
+                            <h3 class="font-bold lg:text-3xl md:text-2xl text-xl text-primary md:py-4 py-2">
+                                Welcome to our Radiology</h3>
+                            <p class="md:text-base text-sm text-secondary w-8/12 lg:mx-0 mx-auto">Lorem
+                                Ipsum is
+                                simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been
+                                the industry's standard dummy text ever since the 1500s,</p>
+                            <button
+                                class="md:my-4 my-2 border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-transparent bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                                Know More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ---------------------------------------------------------- -->
+                <div class="tab" id="main_tab-6">
+                    <div class="flex justify-between flex-wrap lg:flex-no-wrap items-center lg:text-left text-center">
+                        <div class="lg:w-6/12 w-full">
+                            <img src="{% static 'image/Gastroenterology.png' %}" alt="Gastroenterology"
+                                class="mx-auto border-primary border-4">
+                        </div>
+                        <div class="lg:w-6/12 w-full">
+                            <h3 class="font-bold lg:text-3xl md:text-2xl text-xl text-primary md:py-4 py-2">
+                                Welcome to our Gastroenterology</h3>
+                            <p class="md:text-base text-sm text-secondary w-8/12 lg:mx-0 mx-auto">Lorem
+                                Ipsum is
+                                simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been
+                                the industry's standard dummy text ever since the 1500s,</p>
+                            <button
+                                class="md:my-4 my-2 border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-transparent bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center focus:outline-none font-bold">
+                                Know More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- -->
+        </section>
+        <!-- Section 5 start -->
+        <section class="section5 w-full xl:relative">
+            <div class=""
+                style="background-image: url('/static/image/quot-banner.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; box-shadow: inset 0 0 0 2000px rgba(30, 136, 229, 0.9);">
+                <div class="container mx-auto max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5 md:py-20 py-10">
+                    <div class="">
+                        <h2 class="md:text-4xl sm:text-3xl text-2xl font-black text-white text-center md:pb-10 pb-5">
+                            Our Doctors
+                        </h2>
+                        <div class="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
+                            <div>
+                                <img src="{% static 'image/doc1.png' %}" alt="">
+                                <div class="text-center bg-white p-2 border-t-2 border-primary">
+                                    <h4 class="text-primary font-bold md:text-xl sm:text-lg text-base">Dr.Name</h4>
+                                    <p class="md:text-base sm:text-sm text-xs text-gray-500 font-light">Cardiology</p>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="{% static 'image/doc2.png' %}" alt="">
+                                <div class="text-center bg-white p-2 border-t-2 border-primary">
+                                    <h4 class="text-primary font-bold md:text-xl sm:text-lg text-base">Dr.Name</h4>
+                                    <p class="md:text-base sm:text-sm text-xs text-gray-500 font-light">Pulmonology</p>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="{% static 'image/doc3.png' %}" alt="">
+                                <div class="text-center bg-white p-2 border-t-2 border-primary">
+                                    <h4 class="text-primary font-bold md:text-xl sm:text-lg text-base">Dr.Name</h4>
+                                    <p class="md:text-base sm:text-sm text-xs text-gray-500 font-light">Neurology</p>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="{% static 'image/doc4.png' %}" alt="">
+                                <div class="text-center bg-white p-2 border-t-2 border-primary">
+                                    <h4 class="text-primary font-bold md:text-xl sm:text-lg text-base">Dr.Name</h4>
+                                    <p class="md:text-base sm:text-sm text-xs text-gray-500 font-light">Orthopedics</p>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="{% static 'image/doc5.png' %}" alt="">
+                                <div class="text-center bg-white p-2 border-t-2 border-primary">
+                                    <h4 class="text-primary font-bold md:text-xl sm:text-lg text-base">Dr.Name</h4>
+                                    <p class="md:text-base sm:text-sm text-xs text-gray-500 font-light">Radiology</p>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="{% static 'image/doc6.png' %}" alt="">
+                                <div class="text-center bg-white p-2 border-t-2 border-primary">
+                                    <h4 class="text-primary font-bold md:text-xl sm:text-lg text-base">Dr.Name</h4>
+                                    <p class="md:text-base sm:text-sm text-xs text-gray-500 font-light">Gastroenterology
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 6 start -->
+        <section class="section6 w-full">
+            <div class="container mx-auto max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5 md:py-20 py-10">
+                <div class="text-center">
+                    <h2 class="md:text-4xl sm:text-3xl text-2xl font-black text-primary text-center md:pb-10 pb-5">
+                        Contact Us
+                    </h2>
+                    <form>
+                        <input type="text"
+                            class="shadow-sm bg-transparent md:p-4 p-2 md:mb-6 mb-3 w-full block md:text-base text-sm border border-primary border-opacity-20 text-primary rounded-lg focus:ring-primary focus:font-bold focus:border-primary placeholder-primary outline-primary text-center"
+                            placeholder="Name" required>
+                        <input type="text"
+                            class="shadow-sm bg-transparent md:p-4 p-2 md:my-6 my-3 w-full block md:text-base text-sm border border-primary border-opacity-20 text-primary rounded-lg focus:ring-primary focus:font-bold focus:border-primary placeholder-primary outline-primary text-center"
+                            placeholder="Email" required>
+                        <textarea rows="10"
+                            class="shadow-sm bg-transparent md:p-4 p-2 md:mb-6 mb-3 w-full block md:text-base text-sm border border-primary border-opacity-20 text-primary rounded-lg focus:ring-primary focus:font-bold focus:border-primary placeholder-primary outline-primary text-center"
+                            placeholder="Message"></textarea>
+                        <div class="text-center">
+                            <button type="submit"
+                                class="border-2 hover:border-2 hover:border-primary border-primary rounded-full text-white hover:text-primary hover:bg-white bg-primary md:px-6 px-4 py-2 md:text-sm text-xs items-center">
+                                Send&nbsp;message
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Start -->
+    <footer class="bg-primary">
+        <div class="container mx-auto max-w-7xl xl:px-0 lg:px-14 md:px-10 px-5 md:pt-20 pt-10
+     text-white">
+            <div
+                class="flex flex-col lg:justify-between md:justify-center sm:justify-center justify-center lg:flex-row lg:text-start md:text-start sm:text-center text-center">
+                <div class="lg:w-1/3 md:w-full sm:w-full w-full lg:mr-20 md:mr-0 sm:mr-0 mr-0">
+                    <div class="flex lg:justify-start md:justify-start sm:justify-center justify-center md:pb-6 pb-3">
+                        <div class="font-bold md:text-3xl sm:text-2xl text-xl">Our Health</div>
+                    </div>
+                    <div class="">
+                        <p
+                            class="2xl:text-justify xl:text-justify lg:text-justify md:w-9/11 sm:w-9/11 w-full md:text-base sm:text-base text-sm opacity-75">
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Convallis ut nunc leo nibh egestas ut in ut malesuada.</p>
+                    </div>
+                    <div
+                        class="2xl:block xl:block lg:block md:block sm:hidden hidden xl:flex xl:justify-between 2xl:flex 2xl:justify-between md:text-base sm:text-base text-sm font-black 2xl:pt-10 xl:pt-10 lg:pt-10 pt-5 ">
+                        <p class="pb-2">PRIVACY POLICY</p>
+                        <p class="pb-2">TERMS AND CONDITIONS</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 text-sm lg:w-2/3 sm:grid-cols-3 ">
+                    <div class="">
+                        <h3
+                            class="tracking-wide uppercase dark:text-gray-50 md:text-xl sm:text-lg text-md font-black md:py-6 sm:py-4 py-2">
+                            Quick links</h3>
+
+                        <ul class="md:text-base sm:text-base text-sm  opacity-75">
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">Home</a>
+                            </li>
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">About</a>
+                            </li>
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">Department</a>
+                            </li>
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">Doctors</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="">
+                        <h3
+                            class="tracking-wide uppercase dark:text-gray-50 md:text-xl sm:text-lg text-md font-black md:py-6 sm:py-4 py-2">
+                            Help Centre</h3>
+                        <ul class="md:text-base sm:text-base text-sm opacity-75">
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">Faq</a>
+                            </li>
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">Write us</a>
+                            </li>
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">Links</a>
+                            </li>
+                            <li class="pb-2.5">
+                                <a rel="noopener noreferrer" href="#">Links</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="">
+                        <h3
+                            class="tracking-wide uppercase dark:text-gray-50 md:text-xl sm:text-lg text-md font-black md:py-6 sm:py-4 py-2">
+                            Contact Us</h3>
+                        <ul class="md:text-base sm:text-base text-sm opacity-75">
+                            <li class="pb-2.5">
+                                Address:
+                                1223 Fulton Street San Diego CA 941-23 USA
+                            </li>
+                            <li class="pb-2.5">
+                                Email:
+                                ourhealthlimited@gmail.Com
+                            </li>
+                            <li class="pb-2.5">
+                                Phone:
+                                (+01) - 234 567 901
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="2xl:hidden xl:hidden lg:hidden md:hidden sm:block block flex md:justify-between sm:justify-center justify-center flex-wrap md:text-base sm:text-base text-sm font-black 2xl:pt-10 xl:pt-10 lg:pt-10 pt-5 ">
+                    <p class="pb-2">PRIVACY POLICY</p>
+                    <p class="pb-2">TERMS AND CONDITIONS</p>
+                </div>
+            </div>
+            <div
+                class="md:mt-10 mt-5 md:text-sm sm:text-xs text-xs opacity-75 md:py-6 sm:py-4 py-2 flex flex-wrap md:justify-between sm:justify-center justify-center border-t text-center">
+                <div class="">© Copyright 2023 Our Health Limited. <br class="md:hidden sm:block block"> All
+                    Right
+                    Reserved</div>
+                <div class="">Designed & Developed by <a href="/">Pavithra Caz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Script Start -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        // Toggle button
+        if (document.getElementById('nav-mobile-btn')) {
+            document.getElementById('nav-mobile-btn').addEventListener('click', function () {
+                if (this.classList.contains('close')) {
+                    document.getElementById('nav').classList.add('hidden');
+                    this.classList.remove('close');
+                } else {
+                    document.getElementById('nav').classList.remove('hidden');
+                    this.classList.add('close');
+                }
+            });
+        }
+        // Toggle button
+
+        // Scroll to top
+        let mybutton = document.getElementById("scrollBtn");
+        window.onscroll = function () { scrollFunction() };
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        // Scroll to top
+
+        // Tab section
+        $('.tab-nav span').on('click', function () {
+            $([$(this).parent()[0], $($(this).data('href'))[0]]).addClass('active').siblings('.active').removeClass('active');
+
+        });
+        // Tab section
+
+        // select option
+        $(function () {
+            $(".image img:eq(0)").nextAll().hide();
+            $(".details div:eq(0)").nextAll().hide();
+            $(".option div").click(function (e) {
+                var index = $(this).index();
+                $(".image img").eq(index).show().siblings().hide();
+                $(".details div").eq(index).show().siblings().hide();
+            });
+        });
+        // select option
+    </script>
+    <!-- Script end -->
+</body>
+
+</html>
